@@ -1,0 +1,931 @@
+* Emacs Learning
+** window operation
+*** C-x 2 split window vertically
+*** C-x 3 split window horizontally
+*** C-x o switch to other window
+*** C-x 0 delete current window
+*** C-x 1 delete other windows and keep current window
+*** C-x { shrink window horizontally
+*** C-x } enlarge window horizontally
+*** C-x ^ enlarge window vertically
+*** C-x - shrink window if it is larger than buffer
+*** C-x + balance windows
+** minibuffer operation
+*** M-p previous history element
+*** M-n next history element
+*** M-r regexp RET previous matched history element
+*** M-s regexp RET next matched history element
+*** C-x ESC ESC execute the most recent command 
+*** M-x list-command-history
+** text selection
+*** C-x h mark whole buffer
+*** C-x C-p  mark the page
+*** M-h mark paragraph
+** delete
+*** C-k kill a line from the cursor
+*** M-k kill a sentence from the cursor
+*** M-backspace kill a word before the cursor
+*** M-d kill a word from the cursor
+*** C-x backspace kill a sentence before the cursor
+*** C-w kill region
+*** M-w copy the region
+*** C-y paste
+** search
+*** C-s
+*** C-r
+*** C-@ C-@ mark place 
+*** C-u C-@ retrieve marked place
+*** M-% find and replace (y or n)
+** set variables
+这里插入一下如何设置Emacs参数选项，我们键入M-x set-variable RET insert-default-directory RET后输入nil 即可，这里的RET代表回车。改回默认，前面输入一样最后输入t 。
+o let Emacs type for you, you can record a sequence of keys that it can retype at your command. Follow these steps:
+
+1.	Press C-x ( (start-kbd-macro) to tell Emacs to start recording your macro.
+
+2.	Do whatever you want Emacs to do for you later. This can include typing text, moving point, changing buffers, and executing commands. Press C-x ) (end-kbd-macro) to tell Emacs to stop recording the macro.
+
+3.	To execute the macro just recorded type C-x e (call-last-kbd-macro).
+Pressing C-s will make Emacs proceed to the next match of the string alar.
+
+7. You might press C-s a few times until you get to the third occurrence of alarmingly; but an alternative is to press C-w, which will append the rest of the word to the search string, and then press C-s with this modified search string. Try pressing C-w (see Figure 7.7).
+
+Figure 7.7 
+Typing C-w will make Emacs append the rest of the current word to the search string.
+
+8. Finally, press C-s, which brings you to the third occurrence of the word alarmingly (see Figure 7.8).
+
+Figure 7.8 
+Pressing C-s will now continue the search, this time for the word alarmingly.
+** org mode inline execute need the code
+#+BEGIN_SRC elisp
+
+(org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t))) 
+
+#+END_SRC
+
+#+RESULTS:
+
+
+#+BEGIN_SRC ipython :session :results raw drawer
+  %matplotlib inline
+  import matplotlib.pyplot as plt
+  import numpy as np
+#+END_SRC
+
+** common variables and functions
+   
+*** Variables
+
+**** user-emacs-directory
+     
+**** load-path
+
+**** exec-path
+
+**** list-load-path-shadows
+
+**** initial-frame-alist
+
+*** Functions
+
+**** getenv
+
+**** add-to-list
+
+**** expand-file-name
+
+**** eval-buffer
+
+**** list-packages
+
+**** progn
+
+#+BEGIN_SRC emacs-lisp
+
+(+ 1 3)
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+**** concat
+
+**** require
+
+**** load & autoload
+
+* Latex Template
+#+BEGIN_SRC latex
+%=======================02-713 LaTeX template, following the 15-210 template==================
+%
+% You don't need to use LaTeX or this template, but you must turn your homework in as
+% a typeset PDF somehow.
+%
+% How to use:
+%    1. Update your information in section "A" below
+%    2. Write your answers in section "B" below. Precede answers for all 
+%       parts of a question with the command "\question{n}{desc}" where n is
+%       the question number and "desc" is a short, one-line description of 
+%       the problem. There is no need to restate the problem.
+%    3. If a question has multiple parts, precede the answer to part x with the
+%       command "\part{x}".
+%    4. If a problem asks you to design an algorithm, use the commands
+%       \algorithm, \correctness, \runtime to precede your discussion of the 
+%       description of the algorithm, its correctness, and its running time, respectively.
+%    5. You can in\begin{document}\raggedright
+%Section A==============Change the values below to match your information==================
+\newcommand\NAME{Name: 202}  % your name
+\newcommand\ANDREWID{ckingsf}     % your andrew id
+\newcommand\HWNUM{8a}              % the homework number
+%Section B==============Put your answers to the questions below here=======================clude graphics by using the command \includegraphics{FILENAME}
+%
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\headheight}{13.6pt}
+\newcommand\question[2]{\vspace{.25in}\hrule\textbf{#1: #2}\vspace{.5em}\hrule\vspace{.10in}}
+\renewcommand\part[1]{\vspace{.10in}\textbf{(#1)}}
+\newcommand\algorithm{\vspace{.10in}\textbf{Algorithm: }}
+\newcommand\correctness{\vspace{.10in}\textbf{Correctness: }}
+\newcommand\runtime{\vspace{.10in}\textbf{Running time: }}
+\pagestyle{fancyplain}
+\lhead{\textbf{\NAME\ \\Prof. Raul Cruz-Cano\\EPIB651}}
+\chead{\textbf{Homework\ \HWNUM}}
+\rhead{\today
+}
+\begin{document} \raggedright
+
+% %Section A==============Change the values below to match your information==================
+% %\newcommand\NAME{Weizhe Li}  % your name
+% %\newcommand\ANDREWID{ckingsf}     % your andrew id
+% %\newcommand\HWNUM{1}              % the homework number
+% %Section B==============Put your answers to the questions below here=======================
+
+% no need to restat
+%the problem --- the graders know which problem is which,
+% but replacing "The First Problem" with a short phrase will help you remember
+% which problem this is when you read over your homeworks to study.
+
+\question{Chapter 15}{problem 15} 
+
+\part{a}
+
+$\hat{p}_{11}=\dfrac{n_{yes}!n_{no}!n_{1}!n_{2}!}{N!O_{11}!O_{12}!O_{21}!O_{22}!}=\dfrac{10!35!4!41!}{45!2!2!8!33!}=0.18$\\
+
+
+\part{b}
+
+H$_{0}:$ $\hat{p}=0.18$\\
+we can not reject H$_{0}$hyothesis. 
+\part{c}
+
+$(.0889-1.96\times\sqrt{\frac{0.0889\times0.9111}{45}}, .0889+1.96\times\sqrt{\frac{0.0889\times0.9111}{45}})$\\
+so, 95\% CI is \\
+(0.0057, 0.1721), so we know that 0.22 is not included. Then, we reject H$_{0}$.\\
+
+\part{sas code}
+
+proc freq data="/folders/myfolders/SAS/pagano\_ch14\_q09.sas7bdat";\\
+   tables Less\_than\_twelve\_years\_schooling / binomial(wald) alpha=.1;\\
+run;\\
+
+\includegraphics[width=0.7\linewidth]{/Users/liw17/Desktop/10.png}\\
+
+proc freq data="/folders/myfolders/SAS/pagano\_ch14\_q09.sas7bdat";\\
+   tables Less\_than\_twelve\_years\_schooling / binomial(equiv p=.22);\\
+run;\\
+
+\includegraphics[width=0.7\linewidth]{/Users/liw17/Desktop/11.png}\\
+
+\question{Chapter 14}{problem 11}
+
+\part{a}
+
+$\hat{p}_{prepaid}=\frac{13}{311}=0.0418$\\
+$\hat{p}_{traditional}=\frac{22}{310}=0.071$\\
+
+\part{b}
+
+$\hat{p}=\dfrac{13+22}{311+310}=0.0564$\\
+
+$Z=\dfrac{0.0418-0.071}{\sqrt{0.071\times 0.929(1/13+1/22)}}=-0.325$
+
+$p=0.373>0.1$\\
+
+\part{c}
+
+so, we can not reject that the two rate are the same.
+
+
+\question{Chapter 15}{problem 11} 
+
+\part{a}
+
+data certificate;\\
+input years$ accurates$ count;\\
+datalines;\\
+55-65 accurate 2040\\
+55-65 nochange 367\\
+55-65 incurate 327\\
+70-70 accurate 149 \\
+70-70 nochange 60\\
+70-70 incurate 48\\
+70-71 accurate 288\\
+70-71 nochange 25\\
+70-71 incurate 70\\
+75-77 accurate 703\\
+75-77 nochange 197\\
+75-77 incurate 252\\
+77-78 accurate 425 \\
+77-78 nochange 62\\
+77-78 incurate 88\\
+80-80 accurate 121\\
+80-80 nochange 72\\
+80-80 incurate 79\\
+；\\
+run; \\
+
+proc freq data=certificate;\\
+   weight count;\\
+   tables years*accurates /chisq nocol nopercent norow;\\
+run;\\
+
+
+\includegraphics[width=0.7\linewidth]{/Users/liw17/Desktop/9.png}\\
+
+since p<0.01, the result is not homogeneous.
+
+\part{b}
+
+The rate of incorrect recording was over estimated. 
+
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+#+END_SRC
+
+* Meeting 
+
+** <2018-09-25 Tue> 
+
+* Computer Vision
+
+** OpenCV
+
+#+BEGIN_SRC ipython
+
+import cv2 as cv2
+import argparse
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", required = True, help = "/User/liw17/Downl")
+args = vars(ap.parse_args())
+image = cv2.imread(args["image"])
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[2]:
+
+* Python Learning
+  
+** Basic pandas practise 
+#+BEGIN_SRC python :results output
+import numpy as np
+import matplotlib.pyplot as plt
+def test():
+    print('this is printed')
+    return 
+
+
+
+
+storage = {}
+storage['first']={}
+storage['middle']={}
+storage['last']={}
+
+me = 'magnus lie hetland'
+you = 'licheng hexia jie'
+storage['first']['magnus'] = [me, you]
+storage['middle']['lie']=[me]
+storage['last']['hetland'] = [me]
+storage['last']['hetland'].append(you)
+def init(data):
+    data['first']={}
+    data['middle']={}
+    data['last']={}
+#storage = {}
+#init(storage)
+print (storage)
+
+def lookup(data, label, name):
+    return data[label].get(name)
+
+x = lookup(storage, 'middle', 'lie')
+
+print (x)
+
+def store(data, full_name):
+    names= full_name.split()
+    if len(names) == 2:  names.insert(1, '')
+    labels = 'first', 'middle', 'last'
+
+    for label, name in zip(labels, names):
+        people = lookup(data, label, name)
+        if people:
+             people.append(full_name)
+        else:
+            data[label][name] = [full_name]
+
+myNames = {}
+init(myNames)
+print(myNames)
+store(myNames, 'weizhe li')
+store(myNames, 'jinqing liang')
+print(myNames)
+y=lookup(myNames, 'first', 'wei')
+print(y)
+print('new message')
+import numpy as np
+import matplotlib.pyplot as plt
+x = np.arange(100)
+y = np.arange(100)
+f = plt.plot(x, y)
+#plt.imshow(f)
+#plt.show()
+import tensorflow as tf 
+
+#+END_SRC
+
+#+RESULTS:
+: {'first': {'magnus': ['magnus lie hetland', 'licheng hexia jie']}, 'middle': {'lie': ['magnus lie hetland']}, 'last': {'hetland': ['magnus lie hetland', 'licheng hexia jie']}}
+: ['magnus lie hetland']
+: {'first': {}, 'middle': {}, 'last': {}}
+: {'first': {'weizhe': ['weizhe li'], 'jinqing': ['jinqing liang']}, 'middle': {'': ['weizhe li', 'jinqing liang']}, 'last': {'li': ['weizhe li'], 'liang': ['jinqing liang']}}
+: None
+: new message
+
+** Categorical Data Analysis Final Project by pandas
+#+BEGIN_SRC python
+
+import pandas as pd
+import re
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.cross_validation import KFold   #For K-fold cross validation
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn import metrics
+
+# Data discription
+data = pandas.read_csv("/Users/liw17/maryland.csv")
+data.info()
+data.describe()
+len(data)
+data.columns
+data.head()
+data["Age Group"].describe()
+%matplotlib inline
+data.age_group.hist()
+data.groupby(['death']).groups.keys()
+
+import matplotlib.pyplot as plt 
+plt.rc("font", size=14)
+%matplotlib inline
+pd.crosstab(index=data2["death"], columns=data2["urbanization_code"],values=data2["newrate"], aggfunc=sum).plot(kind='bar')
+plt.title('Cause of Death among metro/nonmetro regions')
+plt.xlabel('Cause of Death')
+plt.ylabel('number of cases')
+plt.savefig('new pic')
+
+[[~\Documents\Final Project\51.png]]
+
+#column changes 
+def rename_dataframe_columns(df):
+    """
+    This functions renames columns by replacing spaces with underscores 
+    and making everything lower case
+    
+    df: pandas dataframe as input
+    """
+    cols = df.columns
+    new_column_names = []
+
+    for col in cols:
+        new_col = col.lstrip().lower().replace (" ", "_") #strip beginning spaces, makes lowercase, add underscpre
+        new_column_names.append(new_col)
+
+    df.columns = new_column_names
+
+rename_dataframe_columns(data)
+
+def causeofdeath(death):
+    if "I" in death:
+        return 1  
+    elif "C" in death:
+        return 2
+    else:
+        return 3
+
+def race1(race):
+    if race == "2106-3":
+        return 1
+    elif race == "2054-5":
+        return 0
+    else:
+        return 2
+
+def gendernew(gender_code):
+    if gender_code == "F":
+        return 1
+    elif gender_code == "M":
+        return 0
+    else:
+        return 2
+
+def agegroupnew(age_group_code):
+    if age_group_code == "35-44":
+        return 1
+    elif age_group_code == "45-54":
+        return 2
+    elif age_group_code == "55-64":
+        return 3
+    elif age_group_code == "65-74":
+        return 4
+    elif age_group_code == "75-84":
+        return 5
+    elif age_group_code == "85+":
+        return 6
+    else:
+        return 7
+
+death = data.underlying_cause_of_death_code.apply(causeofdeath)
+racenew = data.race_code.apply(race1)
+agegroupnew=data.age_group_code.apply(agegroupnew)
+gendernew = data.gender_code.apply(gendernew)
+
+data = data.assign(death=death.values)
+data = data.assign(racenew=racenew.values)
+data = data.assign(agegroupnew=agegroupnew.values)
+data = data.assign(gendernew=gendernew.values)
+F=data["rate"].round()
+data=data.assign(newrate=F.values)
+
+data.head()
+data.to_csv("marylandnew2.csv")
+
+personnumber=data['count'].sum()
+
+#38458
+
+#drop useless columns
+
+columns = ['age_group', 'race', 'race_code', 'underlying_cause_of_death', 'underlying_cause_of_death_code','crude_rate', 'population']
+data.drop(columns, inplace=True, axis=1)
+
+#discribe data
+data.groupby(["age_group_code"]).groups.keys()
+datalong.groupby(["urbanization"]).groups.keys()
+datalong.groupby(["urbanization_code"]).groups.keys()
+data.groupby(['urbanization_code']).sum()
+
+data.groupby(['death']).groups.keys()
+data.groupby(['death']).sum()
+#1: 212688 2: 47660 3:170708
+data.pivot_table(values=["count"], index=["urbanization_code", "death"], aggfunc=np.sum)
+data.pivot_table(values=["count"], index=["age_group_code", "death"], aggfunc=np.sum)
+data.pivot_table(values=["count"], index=["racenew", "death"], aggfunc=np.sum)
+data.pivot_table(values=["count"], index=["gender_code", "death"], aggfunc=np.sum)
+
+#contingency table
+pd.crosstab(data["death"], data["urbanization_code"],data["count"], aggfunc=sum,  margins=True)
+pd.crosstab(data["death"], data["age_group_code"],data["count"], aggfunc=sum,  margins=True)
+pd.crosstab(data["urbanization_code"], data["age_group_code"],data["count"], aggfunc=sum,  margins=True)
+#get rid of the NaN values
+table22=table22.fillna(0)
+#chi-square calculation
+import statsmodels.api as sm
+table12 = sm.stats.Table(table6)
+rslt = table12.test_nominal_association()
+print(rslt.pvalue)
+print(table12.resid_pearson)
+
+#logistic regression
+pm1 = sm.GLM(data["death"], data["urbanization_code"], family=sm.families.Poisson(sm.families.links.log))
+pfit = pm1.fit()
+print(pfit.summary())
+#R code 
+fit3 <- multinom(marylandfinal$death ~ marylandfinal$urbanization_code + marylandfinal$gender_code + marylandfinal$age_group_code, data = marylandfinal)
+summary(fit3)
+#+END_SRC
+
+** Numpy
+#+BEGIN_SRC ipython
+import numpy as np
+print(np.geomspace(1, 165, num=5))
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[1]:
+
+** Matplotlib
+#+BEGIN_SRC ipython
+%matplotlib inline
+import matplotlib.pyplot as plt
+X = range(100)
+Y = [value**2 for value in X]
+plt.plot(X, Y)
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[15]:
+: : [<matplotlib.lines.Line2D at 0x112a82cf8>]
+: [[file:./obipy-resources/137174lb.png]]
+
+#+BEGIN_SRC ipython
+%matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
+X = np.linspace(-3, 3, 100)
+Y = np.exp(-X**2)
+plt.plot(X, Y)
+
+def plot_slope(X, Y):
+    Xs = X[1:] - X[:-1]
+    Ys = Y[1:] - Y[:-1]
+    plt.plot(X[1:], Ys/Xs)
+plot_slope(X, Y)
+print(X[1:])
+#+END_SRC
+
+#+RESULTS:
+: # Out[21]:
+: [[file:./obipy-resources/13717riJ.png]]
+#+BEGIN_SRC ipython
+%matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
+X, Y = [], []
+for line in open('/Users/liw17/Documents/my_data.txt', 'r'):
+    values = [float(s) for s in line.split()]
+    X.append(values[0])
+    Y.append(values[1])
+
+plt.plot(X, Y)
+#+END_SRC
+
+#+RESULTS:
+: # Out[23]:
+: : [<matplotlib.lines.Line2D at 0x112e2c748>]
+: [[file:./obipy-resources/137174sP.png]]
+
+#+BEGIN_SRC ipython :session mysession :exports both :results raw drawer
+ 
+%matplotlib inline
+def foo(x):
+      return x + 9
+[foo(x) + 7 for x in range(7)]
+import numpy as np
+import matplotlib.pyplot as plt
+plt.hist(np.random.randn(20000), bins=200)
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[2]:
+#+BEGIN_EXAMPLE
+  (array([  1.,   0.,   0.,   0.,   2.,   0.,   0.,   1.,   1.,   1.,   5.,
+  2.,   2.,   1.,   3.,   5.,   1.,   1.,   4.,   4.,   1.,   6.,
+  3.,   2.,   7.,   5.,   6.,   5.,   7.,   8.,   8.,  13.,  13.,
+  9.,  15.,  14.,  13.,  20.,  16.,  20.,  17.,  36.,  32.,  37.,
+  38.,  36.,  43.,  39.,  44.,  49.,  50.,  54.,  76.,  71.,  72.,
+  85.,  91.,  99.,  95., 117., 101., 114., 127., 115., 145., 135.,
+  159., 155., 142., 153., 163., 161., 199., 222., 213., 186., 225.,
+  218., 226., 236., 229., 232., 275., 248., 268., 261., 275., 276.,
+  248., 294., 285., 267., 285., 319., 296., 314., 308., 277., 317.,
+  310., 320., 303., 311., 273., 318., 294., 291., 278., 277., 266.,
+  300., 259., 261., 279., 239., 242., 249., 243., 225., 214., 217.,
+  205., 211., 175., 196., 174., 155., 167., 158., 170., 135., 137.,
+  121., 122., 127., 122., 103., 113.,  81.,  92.,  88.,  86.,  77.,
+  66.,  72.,  58.,  60.,  65.,  48.,  55.,  53.,  42.,  38.,  29.,
+  36.,  35.,  35.,  26.,  30.,  25.,  11.,  13.,  18.,  10.,  13.,
+  9.,   8.,  14.,   5.,   6.,   5.,   6.,   3.,   2.,   1.,   5.,
+  9.,   6.,   3.,   4.,   3.,   1.,   2.,   2.,   0.,   3.,   0.,
+  2.,   0.,   1.,   1.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,
+  1.,   1.]),
+  array([-3.76683172, -3.72868176, -3.6905318 , -3.65238184, -3.61423189,
+  -3.57608193, -3.53793197, -3.49978201, -3.46163205, -3.4234821 ,
+  -3.38533214, -3.34718218, -3.30903222, -3.27088226, -3.23273231,
+  -3.19458235, -3.15643239, -3.11828243, -3.08013248, -3.04198252,
+  -3.00383256, -2.9656826 , -2.92753264, -2.88938269, -2.85123273,
+  -2.81308277, -2.77493281, -2.73678286, -2.6986329 , -2.66048294,
+  -2.62233298, -2.58418302, -2.54603307, -2.50788311, -2.46973315,
+  -2.43158319, -2.39343323, -2.35528328, -2.31713332, -2.27898336,
+  -2.2408334 , -2.20268345, -2.16453349, -2.12638353, -2.08823357,
+  -2.05008361, -2.01193366, -1.9737837 , -1.93563374, -1.89748378,
+  -1.85933383, -1.82118387, -1.78303391, -1.74488395, -1.70673399,
+  -1.66858404, -1.63043408, -1.59228412, -1.55413416, -1.51598421,
+  -1.47783425, -1.43968429, -1.40153433, -1.36338437, -1.32523442,
+  -1.28708446, -1.2489345 , -1.21078454, -1.17263458, -1.13448463,
+  -1.09633467, -1.05818471, -1.02003475, -0.9818848 , -0.94373484,
+  -0.90558488, -0.86743492, -0.82928496, -0.79113501, -0.75298505,
+  -0.71483509, -0.67668513, -0.63853518, -0.60038522, -0.56223526,
+  -0.5240853 , -0.48593534, -0.44778539, -0.40963543, -0.37148547,
+  -0.33333551, -0.29518556, -0.2570356 , -0.21888564, -0.18073568,
+  -0.14258572, -0.10443577, -0.06628581, -0.02813585,  0.01001411,
+  0.04816407,  0.08631402,  0.12446398,  0.16261394,  0.2007639 ,
+  0.23891385,  0.27706381,  0.31521377,  0.35336373,  0.39151369,
+  0.42966364,  0.4678136 ,  0.50596356,  0.54411352,  0.58226347,
+  0.62041343,  0.65856339,  0.69671335,  0.73486331,  0.77301326,
+  0.81116322,  0.84931318,  0.88746314,  0.9256131 ,  0.96376305,
+  1.00191301,  1.04006297,  1.07821293,  1.11636288,  1.15451284,
+  1.1926628 ,  1.23081276,  1.26896272,  1.30711267,  1.34526263,
+  1.38341259,  1.42156255,  1.4597125 ,  1.49786246,  1.53601242,
+  1.57416238,  1.61231234,  1.65046229,  1.68861225,  1.72676221,
+  1.76491217,  1.80306212,  1.84121208,  1.87936204,  1.917512  ,
+  1.95566196,  1.99381191,  2.03196187,  2.07011183,  2.10826179,
+  2.14641175,  2.1845617 ,  2.22271166,  2.26086162,  2.29901158,
+  2.33716153,  2.37531149,  2.41346145,  2.45161141,  2.48976137,
+  2.52791132,  2.56606128,  2.60421124,  2.6423612 ,  2.68051115,
+  2.71866111,  2.75681107,  2.79496103,  2.83311099,  2.87126094,
+  2.9094109 ,  2.94756086,  2.98571082,  3.02386078,  3.06201073,
+  3.10016069,  3.13831065,  3.17646061,  3.21461056,  3.25276052,
+  3.29091048,  3.32906044,  3.3672104 ,  3.40536035,  3.44351031,
+  3.48166027,  3.51981023,  3.55796018,  3.59611014,  3.6342601 ,
+  3.67241006,  3.71056002,  3.74870997,  3.78685993,  3.82500989,
+  3.86315985]),
+  <a list of 200 Patch objects>)
+#+END_EXAMPLE
+[[file:./obipy-resources/13717rbV.png]]
+:END:
+     
+
+#+BEGIN_SRC ipython :session :exports both :results raw drawer
+  plt.hist(np.random.randn(20000), bins=200)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[3]:
+:END:      
+  
+
+
+#+BEGIN_SRC ipython :session :exports both :results raw drawer
+%matplotlib inline
+from matplotlib import pyplot as plt
+import numpy as np
+plt.figure(figsize=(8, 5), dpi=80)
+plt.subplot(111)
+X = np.linspace(-np.pi, np.pi, 256, endpoint=True)
+S = np.sin(X)
+C = np.cos(X)
+plt.plot(X, C, color='blue', linewidth = 2.5, linestyle = "-", label = "cosine")
+plt.plot(X, S, color='red', linewidth = 2.5, linestyle = "-", label = "sine")
+plt.xlim(X.min() * 1.1, X.max() * 1.1)
+plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi], [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
+plt.ylim(C.min()*1.1, C.max()*1.1)
+plt.yticks([-1, 0, +1])
+plt.legend(loc = 'upper left')
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[2]:
+: <matplotlib.legend.Legend at 0x1139d8cf8>
+[[file:./obipy-resources/137173kU.png]]
+:END:
+
+#+BEGIN_SRC ipython
+%matplotlib inline
+import matplotlib.pyplot as plt
+size = 256, 16
+dpi = 72.0
+figsize = size[0]/float(dpi), size[1]/float(dpi)
+fig = plt.figure(figsize=figsize, dpi=dpi)
+fig.patch.set_alpha(0)
+plt.axes([0, 0.1, 1, 0.8], frameon = False)
+for i in range(1, 11):
+    plt.plot([i, i], [0, 1], lw=1.5)
+
+plt.xlim(0, 11)
+plt.xticks(())
+plt.yticks(())
+plt.show()
+
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[3]:
+: [[file:./obipy-resources/129260RO.png]]
+#+BEGIN_SRC ipython
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+n = 1024
+X = np.random.normal(0, 1, n)
+Y = np.random.normal(0, 1, n)
+T = np.arctan2(Y, X)
+plt.scatter(X, Y, s = 75, c = T, alpha = 0.8)
+from matplotlib.patches import FancyBboxPatch
+ax = plt.gca()
+ax.add_patch(FancyBboxPatch((-0.05, .87),
+                             width=0.66, height=0.165, clip_on=False,
+                             boxstyle = 'square, pad=0', zorder = 3,
+                             facecolor = 'white', alpha = 1.0,
+                             transform=plt.gca().transAxes))
+plt.text(-0.05, 1.02, "Scatter plot",
+         horizontalalignment = 'left',
+         verticalalignment = 'top',
+         size = 'xx-large',
+         transform = plt.gca().transAxes)
+#+END_SRC
+
+#+RESULTS:
+: # Out[13]:
+: : Text(-0.05,1.02,'Scatter plot')
+: [[file:./obipy-resources/13717eRP.png]]
+
+** Machine Learning
+#+BEGIN_SRC ipython 
+from sklearn.decomposition import PCA
+
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[1]:
+
+** Project
+#+BEGIN_SRC ipython :session :exports both :results raw drawer
+
+import os.path as osp
+import openslide
+from pathlib import Path
+
+#BASE_TRUTH_DIR = Path('/home/ubuntu/data/Ground_Truth_Extracted/Mask')
+
+#slide_path = '/home/ubuntu/data/slides/Tumor_009.tif'
+#truth_path = str(BASE_TRUTH_DIR / 'Tumor_009_Mask.tif')
+BASE_TRUTH_DIR = Path('/Users/liw17/Downloads/camelyontest/Mask')
+
+slide_path = '/Users/liw17/Downloads/camelyontest/slides/tumor_026.tif'
+truth_path = osp.join(BASE_TRUTH_DIR, 'tumor_026_mask.tif')
+
+
+slide = openslide.open_slide(slide_path)
+truth = openslide.open_slide(truth_path)
+
+"Original Slide dimensions %dx%d" % slide.dimensions
+"Original Truth dimensions %dx%d" % truth.dimensions
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[6]:
+# text/plain
+: 'Original Truth dimensions 97280x220672'
+:END:
+
+#+BEGIN_SRC ipython :session :exports both :results raw drawer
+import numpy as np
+import matplotlib.pyplot as plt
+thumbnail = slide.get_thumbnail((slide.dimensions[0] / 256, slide.dimensions[1] / 256))
+thumbnail_truth = truth.get_thumbnail((truth.dimensions[0] / 256, truth.dimensions[1] / 256)) 
+
+f, axes = plt.subplots(1, 2, figsize=(10, 10));
+ax = axes.ravel()
+ax[0].imshow(thumbnail);
+ax[0].set_title('Slide %dx%d' % thumbnail.size)
+ax[1].imshow(thumbnail_truth);
+ax[1].set_title('Truth %dx%d' % thumbnail_truth.size)
+f.suptitle('Slide & Truth Thumbnails (downsampled 256x)')
+#+END_SRC
+#+BEGIN_SRC ipython
+import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+
+pred005dim = np.load('/Users/liw17/Documents/new pred/dimensions_tumor_026.npy')
+
+pred005 = np.load('/Users/liw17/Documents/new pred/outputheatmap_tumor_026.npy')
+
+if pred005dim[6]*pred005dim[7] == len(pred005):
+       pred005final=pred005.reshape(int(pred005dim[6]), int(pred005dim[7]))
+
+else:
+     
+       pred005new = pred005[:pred005dim[7]*pred005dim[8]]
+       
+       pred005final=pred005new.reshape(pred005dim[7], pred005dim[8])
+
+pred005finalfinal=np.zeros((pred005dim[0], pred005dim[1]), pred005final.dtype)
+
+pred005finalfinal[:] = 0.2722071
+       
+pred005finalfinal[pred005dim[5]:pred005dim[6]+1, pred005dim[3]:pred005dim[4]+1] = pred005final
+
+#print (pred005finalfinal) 
+
+
+plt.imshow(pred005finalfinal, cmap = 'jet')
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[22]:
+: : <matplotlib.image.AxesImage at 0x10e0f80f0>
+: [[file:./obipy-resources/9926DPY.png]]
+
+#+BEGIN_SRC ipython
+import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+
+pred005dim = np.load('/Users/liw17/Documents/new pred/dimensions_tumor_026.npy')
+
+pred005 = np.load('/Users/liw17/Documents/new pred/outputheatmap_tumor_026.npy')
+
+print(pred005dim)
+print(len(pred005))
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[19]:
+
+#+BEGIN_SRC ipython
+pred005final = pred005.reshape(768, 328)
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+plt.imshow(pred005final)
+
+#+END_SRC
+#+RESULTS:
+: # Out[8]:
+: : <matplotlib.image.AxesImage at 0x109a129e8>
+: [[file:./obipy-resources/4928599u.png]]
+
+#+BEGIN_SRC ipython
+
+print (pred005)
+print (pred005dim)
+len(pred005)
+
+#+END_SRC
+
+#+RESULTS:
+: # Out[19]:
+: : 251904
+
+#+BEGIN_SRC ipython
+import os.path as osp
+import openslide
+import numpy as np
+import matplotlib.pyplot as plt
+slide_path = '/Users/liw17/Documents/camelyon16/train/tumor/tumor_005.tif'
+truth_path = '/Users/liw17/Documents/camelyon16/train/mask/tumor_005_mask.tif'
+slide = openslide.open_slide(slide_path)
+truth = openslide.open_slide(truth_path)
+thumbnail = slide.get_thumbnail((slide.dimensions[0] / 224, slide.dimensions[1] / 224))
+thumbnail_truth = truth.get_thumbnail((truth.dimensions[0] / 224, truth.dimensions[1] / 224)) 
+
+f, axes = plt.subplots(1, 3, figsize=(20, 10));
+ax = axes.ravel()
+ax[0].imshow(thumbnail);
+ax[0].set_title('Slide %dx%d' % thumbnail.size)
+ax[1].imshow(thumbnail_truth);
+ax[1].set_title('Truth %dx%d' % thumbnail_truth.size)
+ax[2].imshow(pred005finalfinal);
+ax[2].set_title('prediction')
+f.suptitle('Slide & Truth Thumbnails (downsampled 224x)')
+#+END_SRC
+#+RESULTS:
+: # Out[26]:
+: : Text(0.5,0.98,'Slide & Truth Thumbnails (downsampled 224x)')
+: [[file:./obipy-resources/49285XZv.png]]
